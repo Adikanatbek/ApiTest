@@ -3,6 +3,7 @@ from rest_framework import generics
 from cars.serializers import *
 from cars.models import Car
 from cars.permissions import IsOwnerOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 class CarDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -19,5 +20,4 @@ class CarListView(generics.ListAPIView):
 
 class CarCreateView(generics.CreateAPIView):
     serializer_class = CarDetailSerializer
-
-
+    permission_classes = (IsAuthenticated, )
